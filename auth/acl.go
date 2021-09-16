@@ -14,6 +14,7 @@ import (
 	"libs.altipla.consulting/connect"
 	"libs.altipla.consulting/env"
 	"libs.altipla.consulting/errors"
+	"libs.altipla.consulting/naming"
 	"libs.altipla.consulting/routing"
 )
 
@@ -164,5 +165,5 @@ func HasPerm(r *http.Request, perm string) bool {
 		return !collections.HasString(deny, perm)
 	}
 
-	return collections.HasString(control.enabledPerms, perm)
+	return collections.HasString(control.enabledPerms, naming.Generate("permissions", perm))
 }
