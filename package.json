@@ -1,7 +1,7 @@
 {
   "name": "@altipla/mpa",
   "private": true,
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Utilities for internal MPA apps with Go.",
   "scripts": {
     "test": ""
