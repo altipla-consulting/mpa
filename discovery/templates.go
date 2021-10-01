@@ -8,7 +8,7 @@ import (
 	"libs.altipla.consulting/env"
 )
 
-func TemplatesLocalAnchor() string {
+func TemplatesLocalAnchor(subfolder string) string {
 	if env.IsLocal() {
 		wd, err := os.Getwd()
 		if err != nil {
@@ -24,7 +24,7 @@ func TemplatesLocalAnchor() string {
 				log.Fatal(err)
 			}
 
-			return wd
+			return filepath.Join(wd, subfolder)
 		}
 	}
 	return ""
