@@ -104,3 +104,7 @@ func (info *Info) Info() (string, error) {
 	}
 	return string(b), nil
 }
+
+func (info *Info) TotalSize() int64 {
+	return info.totalSize
+}
