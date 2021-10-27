@@ -6,7 +6,7 @@ import (
 	"net/url"
 	"strings"
 
-	pbsecurity "github.com/lavozdealmeria/glider/protos/security"
+	pbsecurity "github.com/lavozdealmeria/glider-client/protos/security"
 	log "github.com/sirupsen/logrus"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
