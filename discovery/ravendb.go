@@ -25,7 +25,7 @@ func OpenRavenDB(dbname string, opts ...rdb.OpenOption) (*rdb.Database, error) {
 			Cert    string
 			CACert  string
 		}
-		f, err := os.Open("/etc/secrets/ravendb-client-credentials")
+		f, err := os.Open("/etc/secrets-v2/ravendb-client-credentials/value")
 		if err != nil {
 			return nil, errors.Trace(err)
 		}
