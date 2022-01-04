@@ -10,8 +10,12 @@ import (
 type Manifest map[string]Chunk
 
 type Chunk struct {
-	File string
-	CSS  []string
+	File           string
+	CSS            []string
+	Assets         []string
+	IsDynamicEntry bool
+	IsEntry        bool
+	DynamicImports []string
 }
 
 func ReadManifest() (Manifest, error) {
