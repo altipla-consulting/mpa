@@ -11,7 +11,17 @@ import (
 	"libs.altipla.consulting/routing"
 )
 
-func Register(r *cloudrun.WebServer, baseTemplate string) {
+type RegisterOption func(r *cloudrun.WebServer)
+
+func WithFrontend(root string) RegisterOption {
+	return func(r *cloudrun.WebServer) {
+		if env.IsLocal() {
+			r.ServeFiles("/images", http.Dir(filepath.Join(root, "images")))
+		}
+	}
+}
+
+func Register(r *cloudrun.WebServer, baseTemplate string, options ...RegisterOption) {
 	go func() {
 		// Touch template to reload the page every time we change the Go implementation.
 		_ = os.Chtimes(baseTemplate, time.Now(), time.Now())
@@ -20,6 +30,10 @@ func Register(r *cloudrun.WebServer, baseTemplate string) {
 	r.Get("/robots.txt", fileHandler("robots.txt"))
 	r.Get("/favicon.ico", fileHandler("favicon.ico"))
 	r.Get("/apple-touch-icon.png", fileHandler("apple-touch-icon.png"))
+
+	for _, opt := range options {
+		opt(r)
+	}
 }
 
 func fileHandler(path string) routing.Handler {
