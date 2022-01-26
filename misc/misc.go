@@ -6,22 +6,22 @@ import (
 	"path/filepath"
 	"time"
 
-	"libs.altipla.consulting/cloudrun"
 	"libs.altipla.consulting/env"
+	"libs.altipla.consulting/hosting"
 	"libs.altipla.consulting/routing"
 )
 
-type RegisterOption func(r *cloudrun.WebServer)
+type RegisterOption func(r *hosting.WebServer)
 
 func WithFrontend(root string) RegisterOption {
-	return func(r *cloudrun.WebServer) {
+	return func(r *hosting.WebServer) {
 		if env.IsLocal() {
 			r.ServeFiles("/images", http.Dir(filepath.Join(root, "images")))
 		}
 	}
 }
 
-func Register(r *cloudrun.WebServer, baseTemplate string, options ...RegisterOption) {
+func Register(r *hosting.WebServer, baseTemplate string, options ...RegisterOption) {
 	go func() {
 		// Touch template to reload the page every time we change the Go implementation.
 		_ = os.Chtimes(baseTemplate, time.Now(), time.Now())
