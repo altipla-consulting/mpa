@@ -1,10 +1,10 @@
 package discovery
 
 import (
-	"log"
 	"os"
 	"path/filepath"
 
+	log "github.com/sirupsen/logrus"
 	"libs.altipla.consulting/env"
 )
 
